@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLB Zone Whiff — Top 10 Pitch Profiles 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d12;
+    --surface: #111520;
+    --surface2: #161b28;
+    --border: #1e2535;
+    --accent: #00e5ff;
+    --accent2: #ff6b35;
+    --accent3: #a8ff3e;
+    --gold: #ffd166;
+    --text: #ffffff;
+    --muted: #c8d0e0;
+    --dim: #3d4e6e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 40px 24px;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--accent));
+    margin: 0 auto 16px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    font-size: 13px;
+    color: #ffffff;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+
+  /* LEGEND BAR */
+  .legend-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 14px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* COLUMN HEADERS */
+  .col-headers {
+    display: grid;
+    grid-template-columns: 36px 240px 1fr 80px 80px 80px 80px 80px;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto 8px;
+    padding: 0 8px;
+  }
+
+  .col-head {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-align: center;
+    padding: 4px 2px;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .col-head:nth-child(2) { text-align: left; padding-left: 0; }
+
+  /* PITCH CARDS */
+  .rankings {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pitch-row {
+    display: grid;
+    grid-template-columns: 36px 240px 1fr 80px 80px 80px 80px 80px;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    border-radius: 3px;
+    padding: 14px 8px;
+    align-items: center;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeSlide 0.4s ease both;
+  }
+
+  .pitch-row:hover {
+    border-color: var(--border);
+    background: var(--surface2);
+    transform: translateX(2px);
+  }
+
+  .pitch-row:nth-child(1) { animation-delay: 0.05s; border-left-color: var(--gold); }
+  .pitch-row:nth-child(2) { animation-delay: 0.1s; border-left-color: var(--gold); }
+  .pitch-row:nth-child(3) { animation-delay: 0.15s; border-left-color: var(--gold); }
+  .pitch-row:nth-child(4) { animation-delay: 0.2s; border-left-color: var(--accent); }
+  .pitch-row:nth-child(5) { animation-delay: 0.25s; border-left-color: var(--accent); }
+  .pitch-row:nth-child(6) { animation-delay: 0.3s; border-left-color: var(--accent); }
+  .pitch-row:nth-child(7) { animation-delay: 0.35s; border-left-color: var(--accent2); }
+  .pitch-row:nth-child(8) { animation-delay: 0.4s; border-left-color: var(--accent2); }
+  .pitch-row:nth-child(9) { animation-delay: 0.45s; border-left-color: var(--accent2); }
+  .pitch-row:nth-child(10) { animation-delay: 0.5s; border-left-color: #c8d0e0; }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(-12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* RANK */
+  .rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #c8d0e0;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .pitch-row:nth-child(1) .rank,
+  .pitch-row:nth-child(2) .rank,
+  .pitch-row:nth-child(3) .rank { color: var(--gold); }
+
+  /* PITCH INFO */
+  .pitch-info { padding-right: 12px; }
+
+  .pitch-type-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    background: var(--dim);
+    color: #ffffff;
+  }
+
+  .pitch-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .pitch-archetype {
+    font-size: 11px;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    margin-top: 3px;
+  }
+
+  /* ZONE WHIFF BAR */
+  .whiff-col { padding: 0 12px; }
+
+  .whiff-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--accent3);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .whiff-bar-track {
+    height: 4px;
+    background: var(--dim);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .whiff-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--accent3), var(--accent));
+    transition: width 1s ease;
+  }
+
+  /* METRIC CELLS */
+  .metric-cell {
+    text-align: center;
+    padding: 2px 4px;
+  }
+
+  .metric-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .metric-range {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: #ffffff;
+    letter-spacing: 0.06em;
+  }
+
+  .bucket-pill {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    padding: 2px 5px;
+    border-radius: 2px;
+    margin-top: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  .bucket-elite { background: rgba(0,229,255,0.12); color: var(--accent); }
+  .bucket-plus  { background: rgba(168,255,62,0.1); color: var(--accent3); }
+  .bucket-avg   { background: rgba(255,107,53,0.1); color: var(--accent2); }
+  .bucket-below { background: rgba(90,100,128,0.2); color: #ffffff; }
+
+  /* METHODOLOGY */
+  .methodology {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .method-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 20px;
+  }
+
+  .method-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .bucket-def {
+    font-size: 11px;
+    color: #ffffff;
+    font-family: 'DM Mono', monospace;
+    line-height: 1.6;
+  }
+
+  .bucket-def strong {
+    display: block;
+    color: #ffffff;
+    font-size: 10px;
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footnote {
+    max-width: 1100px;
+    margin: 16px auto 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #ffffff;
+    letter-spacing: 0.06em;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* Glow effect on top 3 */
+  .pitch-row:nth-child(1)::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(255,209,102,0.03) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* DIVIDER LABELS */
+  .tier-divider {
+    max-width: 1100px;
+    margin: 12px auto 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tier-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tier-line {
+    height: 1px;
+    flex: 1;
+    background: var(--dim);
+  }
+
+  .tier-elite .tier-label { color: var(--gold); }
+  .tier-plus  .tier-label { color: var(--accent); }
+  .tier-avg   .tier-label { color: var(--accent2); }
+  .tier-std   .tier-label { color: #c8d0e0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Statcast Analysis · 2026 MLB Season</div>
+  <h1>Zone <span>Whiff</span><br>Pitch Profiles</h1>
+  <div class="subtitle">Top 10 pitch archetypes ranked by in-zone swing-and-miss · Velocity / IVB / HB / VAA / HAA bucketing system</div>
+</div>
+
+<div class="legend-bar">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div> Top Tier (Elite Zone Whiff)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> Plus Tier</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div> Above Average Tier</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--muted)"></div> Standard</div>
+  <div class="legend-item" style="margin-left:16px; border-left:1px solid var(--dim); padding-left:16px;">
+    <span style="font-size:10px;color:#ffffff">Zone Whiff = Whiffs ÷ Swings on in-zone pitches only</span>
+  </div>
+</div>
+
+<!-- COLUMN HEADERS -->
+<div class="col-headers">
+  <div class="col-head">#</div>
+  <div class="col-head" style="text-align:left">Pitch Profile</div>
+  <div class="col-head">In-Zone Whiff %</div>
+  <div class="col-head">Velocity</div>
+  <div class="col-head">IVB</div>
+  <div class="col-head">H-Break</div>
+  <div class="col-head">VAA</div>
+  <div class="col-head">HAA</div>
+</div>
+
+<!-- TIER LABEL: ELITE -->
+<div class="tier-divider tier-elite">
+  <div class="tier-line"></div>
+  <div class="tier-label">▲ Elite Tier</div>
+  <div class="tier-line"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- 1. Low-Spin Splitter (90-92 mph) -->
+  <div class="pitch-row">
+    <div class="rank">1</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Offspeed</div>
+      <div class="pitch-name">Low-Spin Splitter</div>
+      <div class="pitch-archetype">Bradley / Sasaki / Martinez</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">54–58%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:95%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent)">90–92</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-elite">FIRM</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent2)">-7 to -10"</div>
+      <div class="metric-range">depth</div>
+      <div class="bucket-pill bucket-elite">ELITE DEPTH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">12–17"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent3)">-7° to -9°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-elite">STEEP</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">3–6"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-avg">NEUTRAL</div>
+    </div>
+  </div>
+
+  <!-- 2. High-Ride 4-Seam (upper zone) -->
+  <div class="pitch-row">
+    <div class="rank">2</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Fastball</div>
+      <div class="pitch-name">High-Ride 4-Seam (Top Zone)</div>
+      <div class="pitch-archetype">Schlittler / Ryan / Burns</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">46–52%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:86%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent)">95–99</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-elite">ELITE VEL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent3)">+18 to +22"</div>
+      <div class="metric-range">hop</div>
+      <div class="bucket-pill bucket-elite">ELITE RIDE</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">3–8"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-below">LOW</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent3)">-3° to -4.5°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-elite">FLAT</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">1–3"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-avg">NEUTRAL</div>
+    </div>
+  </div>
+
+  <!-- 3. Traditional Splitter (88-91 mph) -->
+  <div class="pitch-row">
+    <div class="rank">3</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Offspeed</div>
+      <div class="pitch-name">Traditional Splitter</div>
+      <div class="pitch-archetype">Gausman / Gilbert / Houck</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">38–50%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:80%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent)">88–91</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-plus">PLUS VEL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent2)">-5 to -8"</div>
+      <div class="metric-range">depth</div>
+      <div class="bucket-pill bucket-plus">PLUS DROP</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">14–22"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-elite">ELITE</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent3)">-6° to -8°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-elite">STEEP</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">4–8"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-avg">NEUTRAL</div>
+    </div>
+  </div>
+
+<!-- TIER BREAK: PLUS -->
+</div>
+
+<div class="tier-divider tier-plus" style="margin-top:14px">
+  <div class="tier-line"></div>
+  <div class="tier-label">▲ Plus Tier</div>
+  <div class="tier-line"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- 4. Power Changeup (velocity separation + fade) -->
+  <div class="pitch-row">
+    <div class="rank">4</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Offspeed</div>
+      <div class="pitch-name">Power Changeup</div>
+      <div class="pitch-archetype">Skubal / Burns / Gallen</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">40–48%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:78%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent)">87–91</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-plus">PLUS VEL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-2 to -5"</div>
+      <div class="metric-range">depth</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">13–18"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-elite">ELITE</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -7°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">6–10"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+  </div>
+
+  <!-- 5. Vertical Slider (tight/short drop) -->
+  <div class="pitch-row">
+    <div class="rank">5</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Breaking</div>
+      <div class="pitch-name">Vertical Slider</div>
+      <div class="pitch-archetype">Muñoz / Hader / Skenes</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">44–55%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:82%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent)">85–90</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-plus">PLUS VEL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent2)">-6 to -10"</div>
+      <div class="metric-range">depth</div>
+      <div class="bucket-pill bucket-elite">ELITE DEPTH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">4–9"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-avg">LOW</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent3)">-7° to -10°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-elite">STEEP</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-2 to -5"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+  </div>
+
+  <!-- 6. Splinker (95-100 mph) -->
+  <div class="pitch-row">
+    <div class="rank">6</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Offspeed / Hybrid</div>
+      <div class="pitch-name">Splinker (High-Velo Splitter)</div>
+      <div class="pitch-archetype">Duran / Skenes / J. Martinez</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">38–46%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:73%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent)">95–100</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-elite">ELITE VEL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-3 to -6"</div>
+      <div class="metric-range">depth</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">14–18"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-elite">ELITE</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -7°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">5–9"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tier-divider tier-avg" style="margin-top:14px">
+  <div class="tier-line"></div>
+  <div class="tier-label">▲ Above Average Tier</div>
+  <div class="tier-line"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- 7. High-Spin Sweeper -->
+  <div class="pitch-row">
+    <div class="rank">7</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Breaking</div>
+      <div class="pitch-name">High-Spin Sweeper</div>
+      <div class="pitch-archetype">Crochet / Ekness / Scarborough</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">34–42%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:63%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">83–87</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-1 to +3"</div>
+      <div class="metric-range">near neutral IVB</div>
+      <div class="bucket-pill bucket-avg">NEUTRAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">14–20"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-elite">ELITE</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -7°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-12 to -18"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-elite">ELITE</div>
+    </div>
+  </div>
+
+  <!-- 8. Two-Plane Curveball -->
+  <div class="pitch-row">
+    <div class="rank">8</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Breaking</div>
+      <div class="pitch-name">Two-Plane Curveball</div>
+      <div class="pitch-archetype">Kirby / Pepiot / McClanahan</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">32–40%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:58%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">78–82</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-below">SOFT</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-8 to -14"</div>
+      <div class="metric-range">depth</div>
+      <div class="bucket-pill bucket-elite">ELITE DEPTH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">6–12"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-8° to -12°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-elite">V. STEEP</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-6 to -10"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+  </div>
+
+  <!-- 9. Power Cutter (HAA cut) -->
+  <div class="pitch-row">
+    <div class="rank">9</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Fastball</div>
+      <div class="pitch-name">Power Cutter</div>
+      <div class="pitch-archetype">Fried / Leiter / Crochet</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">28–36%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:50%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent)">92–95</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-plus">PLUS VEL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">+6 to +10"</div>
+      <div class="metric-range">hop</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">2–6"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-avg">CUT</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-4° to -6°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-2 to -5"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tier-divider tier-std" style="margin-top:14px">
+  <div class="tier-line"></div>
+  <div class="tier-label">▲ Standard Tier</div>
+  <div class="tier-line"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- 10. Standard Slider (HAA break, moderate) -->
+  <div class="pitch-row">
+    <div class="rank">10</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge">Breaking</div>
+      <div class="pitch-name">Standard Slider</div>
+      <div class="pitch-archetype">Valdez / Uribe / C. Sánchez</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label">24–32%</div>
+      <div class="whiff-bar-track"><div class="whiff-bar-fill" style="width:40%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">83–87</div>
+      <div class="metric-range">mph</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-2 to -5"</div>
+      <div class="metric-range">depth</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">6–10"</div>
+      <div class="metric-range">HB</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -7°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-plus">PLUS</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5 to -9"</div>
+      <div class="metric-range">HAA</div>
+      <div class="bucket-pill bucket-avg">AVG</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- METHODOLOGY -->
+<div class="methodology">
+  <div class="method-card">
+    <div class="method-title">// Metric Bucket Definitions</div>
+    <div class="method-grid">
+      <div class="bucket-def">
+        <strong>Velocity Buckets</strong>
+        Elite: 95+ mph<br>
+        Plus: 90–94 mph<br>
+        Firm: 87–89 mph<br>
+        Average: 83–86 mph<br>
+        Soft: &lt;83 mph
+      </div>
+      <div class="bucket-def">
+        <strong>IVB Buckets</strong>
+        Elite Rise: +18"+ (4-seam)<br>
+        Plus Rise: +12–18"<br>
+        Elite Depth: -7"+ (neg.)<br>
+        Plus Depth: -4 to -7"<br>
+        Neutral: -3 to +3"
+      </div>
+      <div class="bucket-def">
+        <strong>H-Break Buckets</strong>
+        Elite: 16"+ (any dir.)<br>
+        Plus: 10–15"<br>
+        Average: 5–9"<br>
+        Low: &lt;5"
+      </div>
+      <div class="bucket-def">
+        <strong>VAA Buckets</strong>
+        Flat: -3° to -4.5°<br>
+        Plus: -5° to -6.5°<br>
+        Steep: -7° to -9°<br>
+        V. Steep: -9°+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footnote">
+  Data source: Statcast / Baseball Savant 2026 MLB Season (thru May 2026) · Pitch profiles represent archetypes, not individual pitchers · Zone defined as rulebook strike zone ±0.5 ft buffer<br>
+  IVB = Induced Vertical Break (gravity-removed) · VAA = Vertical Approach Angle at plate · HAA = Horizontal Approach Angle at plate · In-Zone Whiff = Whiffs ÷ Swings on pitches located in zone
+</div>
+
+</body>
+</html>
