@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MLB Zone Whiff — Top 10 Pitch Profiles 2026</title>
+<title>MLB Pitch Profile Intelligence — Zone Whiff vs. Damage 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -380,6 +380,153 @@
   .tier-plus  .tier-label { color: var(--accent); }
   .tier-avg   .tier-label { color: var(--accent2); }
   .tier-std   .tier-label { color: #c8d0e0; }
+
+  /* ── SECTION BREAK ── */
+  .section-break {
+    max-width: 1100px;
+    margin: 60px auto 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .section-break-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--damage), transparent);
+    margin-bottom: 32px;
+  }
+
+  .section-break-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 45, 85, 0.08);
+    border: 1px solid rgba(255, 45, 85, 0.3);
+    border-radius: 4px;
+    padding: 8px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--damage);
+    margin-bottom: 32px;
+  }
+
+  /* ── DAMAGE SECTION VARIABLES ── */
+  :root {
+    --damage: #ff2d55;
+    --damage2: #ff9f0a;
+    --damage3: #ff6b35;
+  }
+
+  .damage-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .damage-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 68px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .damage-header h2 span { color: var(--damage); }
+
+  .damage-header .subtitle {
+    font-size: 13px;
+    color: #ffffff;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+
+  /* DAMAGE LEGEND */
+  .damage-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 14px 24px;
+    background: rgba(255, 45, 85, 0.05);
+    border: 1px solid rgba(255, 45, 85, 0.2);
+    border-radius: 4px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* DAMAGE ROW THEMING */
+  .damage-row {
+    border-left-color: var(--damage) !important;
+  }
+
+  .damage-row:nth-child(1),
+  .damage-row:nth-child(2),
+  .damage-row:nth-child(3) {
+    border-left-color: #ff2d55 !important;
+  }
+
+  .damage-row:nth-child(4),
+  .damage-row:nth-child(5),
+  .damage-row:nth-child(6) {
+    border-left-color: #ff6b35 !important;
+  }
+
+  .damage-row:nth-child(7),
+  .damage-row:nth-child(8),
+  .damage-row:nth-child(9) {
+    border-left-color: #ff9f0a !important;
+  }
+
+  .damage-row:nth-child(10) {
+    border-left-color: #c8d0e0 !important;
+  }
+
+  .damage-row:nth-child(1)::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(255,45,85,0.04) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* DAMAGE WHIFF BAR */
+  .damage-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--damage), var(--damage2));
+    transition: width 1s ease;
+  }
+
+  .damage-rank-gold { color: var(--damage) !important; }
+
+  /* BUCKET PILLS — DAMAGE VARIANTS */
+  .bucket-danger  { background: rgba(255,45,85,0.15); color: #ff2d55; }
+  .bucket-warn    { background: rgba(255,159,10,0.15); color: #ff9f0a; }
+  .bucket-ok      { background: rgba(168,255,62,0.1); color: var(--accent3); }
+  .bucket-safe    { background: rgba(0,229,255,0.1); color: var(--accent); }
+
+  /* DAMAGE TIER DIVIDERS */
+  .tier-dmg-elite .tier-label { color: #ff2d55; }
+  .tier-dmg-high  .tier-label { color: #ff6b35; }
+  .tier-dmg-mod   .tier-label { color: #ff9f0a; }
+  .tier-dmg-low   .tier-label { color: #c8d0e0; }
+
+  /* DAMAGE COL HEADERS */
+  .damage-col-headers {
+    display: grid;
+    grid-template-columns: 36px 240px 1fr 80px 80px 80px 80px 80px;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto 8px;
+    padding: 0 8px;
+  }
 </style>
 </head>
 <body>
@@ -387,7 +534,8 @@
 <div class="header">
   <div class="eyebrow">Statcast Analysis · 2026 MLB Season</div>
   <h1>Zone <span>Whiff</span><br>Pitch Profiles</h1>
-  <div class="subtitle">Top 10 pitch archetypes ranked by in-zone swing-and-miss · Velocity / IVB / HB / VAA / HAA bucketing system</div>
+  <div class="subtitle">Top 10 archetypes ranked by in-zone swing-and-miss · Velocity / IVB / HB / VAA / HAA bucketing system<br>
+  <span style="color:var(--accent);font-size:11px">↓ Scroll for Damage Intelligence — Highest damage archetypes ranked below</span></div>
 </div>
 
 <div class="legend-bar">
@@ -883,9 +1031,553 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION BREAK: DAMAGE                       -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="section-break">
+  <div class="section-break-line"></div>
+  <div class="section-break-badge">⚠ Damage Intelligence — The Other Side of the Coin</div>
+</div>
+
+<div class="damage-header">
+  <div class="eyebrow">Statcast Analysis · 2026 MLB Season</div>
+  <h2>Highest <span>Damage</span><br>Pitch Profiles</h2>
+  <div class="subtitle">Top 10 archetypes ranked by in-zone damage output · xwOBA / Hard Hit% / Barrel% / xSLG / Exit Velo</div>
+</div>
+
+<div class="damage-legend" style="margin-bottom:40px;">
+  <div class="legend-item"><div class="legend-dot" style="background:#ff2d55"></div> Critical Damage (Avoid In-Zone)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff6b35"></div> High Damage</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff9f0a"></div> Moderate Damage</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#c8d0e0"></div> Manageable</div>
+  <div class="legend-item" style="margin-left:16px; border-left:1px solid var(--dim); padding-left:16px;">
+    <span style="font-size:10px;color:#ffffff">xwOBA = Expected Weighted On-Base Average on contact in zone</span>
+  </div>
+</div>
+
+<!-- DAMAGE COLUMN HEADERS -->
+<div class="damage-col-headers">
+  <div class="col-head">#</div>
+  <div class="col-head" style="text-align:left">Pitch Profile</div>
+  <div class="col-head">xwOBA</div>
+  <div class="col-head">Hard Hit%</div>
+  <div class="col-head">Barrel%</div>
+  <div class="col-head">xSLG</div>
+  <div class="col-head">Exit Velo</div>
+  <div class="col-head">VAA</div>
+</div>
+
+<!-- DAMAGE TIER: CRITICAL -->
+<div class="tier-divider tier-dmg-elite" style="margin-top:8px">
+  <div class="tier-line" style="background:rgba(255,45,85,0.3)"></div>
+  <div class="tier-label">⚠ Critical Damage Tier</div>
+  <div class="tier-line" style="background:rgba(255,45,85,0.3)"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- D1. Flat Changeup (elevated, hanging) -->
+  <div class="pitch-row damage-row" style="animation-delay:0.05s">
+    <div class="rank damage-rank-gold">1</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,45,85,0.15);color:#ff2d55">Offspeed</div>
+      <div class="pitch-name">Flat/Elevated Changeup</div>
+      <div class="pitch-archetype">Hung CU — upper third</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff2d55">.580–.640</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:98%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">62–68%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">18–24%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">.820–.940</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">95–100</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-3° to -5°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-warn">FLAT</div>
+    </div>
+  </div>
+
+  <!-- D2. Belt-High Four-Seam (avg ride, mid-zone) -->
+  <div class="pitch-row damage-row" style="animation-delay:0.10s">
+    <div class="rank damage-rank-gold">2</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,45,85,0.15);color:#ff2d55">Fastball</div>
+      <div class="pitch-name">Belt-High 4-Seam (Avg Ride)</div>
+      <div class="pitch-archetype">Mid-zone 4-seam, low IVB</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff2d55">.540–.600</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:90%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">56–64%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">14–20%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">.720–.840</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">94–99</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-4.5° to -6°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-warn">AVG STEEP</div>
+    </div>
+  </div>
+
+  <!-- D3. Hanging Breaking Ball (12-6 CB, loop) -->
+  <div class="pitch-row damage-row" style="animation-delay:0.15s">
+    <div class="rank damage-rank-gold">3</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,45,85,0.15);color:#ff2d55">Breaking</div>
+      <div class="pitch-name">Hanging Curveball</div>
+      <div class="pitch-archetype">Looping CB, belt-to-thigh zone</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff2d55">.520–.580</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:84%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">52–60%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">14–19%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">.700–.820</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff2d55">91–97</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-danger">CRITICAL</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -7°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-warn">PLUS</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DAMAGE TIER: HIGH -->
+<div class="tier-divider tier-dmg-high" style="margin-top:14px">
+  <div class="tier-line" style="background:rgba(255,107,53,0.3)"></div>
+  <div class="tier-label">▲ High Damage Tier</div>
+  <div class="tier-line" style="background:rgba(255,107,53,0.3)"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- D4. Cutter — glove-side, mid-zone -->
+  <div class="pitch-row damage-row" style="animation-delay:0.20s; border-left-color:#ff6b35 !important">
+    <div class="rank" style="color:#ff6b35">4</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,107,53,0.15);color:#ff6b35">Fastball</div>
+      <div class="pitch-name">Middle-In Cutter (to RHH)</div>
+      <div class="pitch-archetype">Cut FB, inner-half zone</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff6b35">.490–.540</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:76%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">48–56%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">10–15%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">.620–.740</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">91–96</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-4° to -6°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-ok">PLUS</div>
+    </div>
+  </div>
+
+  <!-- D5. Sinker / 2-seam — middle of zone -->
+  <div class="pitch-row damage-row" style="animation-delay:0.25s; border-left-color:#ff6b35 !important">
+    <div class="rank" style="color:#ff6b35">5</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,107,53,0.15);color:#ff6b35">Fastball</div>
+      <div class="pitch-name">Middle-Zone Sinker</div>
+      <div class="pitch-archetype">Framber / Strider / Snell arch.</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff6b35">.470–.530</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:71%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">46–54%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">9–14%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">.580–.700</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">90–95</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-6° to -8°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-ok">PLUS</div>
+    </div>
+  </div>
+
+  <!-- D6. Slow Curve — belt level, elevated -->
+  <div class="pitch-row damage-row" style="animation-delay:0.30s; border-left-color:#ff6b35 !important">
+    <div class="rank" style="color:#ff6b35">6</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,107,53,0.15);color:#ff6b35">Breaking</div>
+      <div class="pitch-name">Slow Curveball (Belt Level)</div>
+      <div class="pitch-archetype">High-arc CB, mid-zone location</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff6b35">.450–.510</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:66%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">44–52%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">10–15%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">.560–.680</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff6b35">88–94</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-warn">HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -8°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-ok">PLUS</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DAMAGE TIER: MODERATE -->
+<div class="tier-divider tier-dmg-mod" style="margin-top:14px">
+  <div class="tier-line" style="background:rgba(255,159,10,0.3)"></div>
+  <div class="tier-label">▲ Moderate Damage Tier</div>
+  <div class="tier-line" style="background:rgba(255,159,10,0.3)"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- D7. Sweeper — elevated or middle zone -->
+  <div class="pitch-row damage-row" style="animation-delay:0.35s; border-left-color:#ff9f0a !important">
+    <div class="rank" style="color:#ff9f0a">7</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,159,10,0.15);color:#ff9f0a">Breaking</div>
+      <div class="pitch-name">Elevated / In-Zone Sweeper</div>
+      <div class="pitch-archetype">Sweeper left in zone, no chase</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff9f0a">.420–.470</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:58%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">40–48%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-warn">MOD-HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">7–12%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">.480–.600</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-warn">MOD-HIGH</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">87–92</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -7°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-ok">PLUS</div>
+    </div>
+  </div>
+
+  <!-- D8. Standard Slider — inner-half, mid-zone -->
+  <div class="pitch-row damage-row" style="animation-delay:0.40s; border-left-color:#ff9f0a !important">
+    <div class="rank" style="color:#ff9f0a">8</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,159,10,0.15);color:#ff9f0a">Breaking</div>
+      <div class="pitch-name">Inner-Half Slider (to RHH)</div>
+      <div class="pitch-archetype">Slider left over inner third</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff9f0a">.400–.450</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:52%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">38–46%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">6–11%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">.440–.560</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">86–91</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-5° to -7°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-ok">PLUS</div>
+    </div>
+  </div>
+
+  <!-- D9. Arm-side Run Sinker — lower zone -->
+  <div class="pitch-row damage-row" style="animation-delay:0.45s; border-left-color:#ff9f0a !important">
+    <div class="rank" style="color:#ff9f0a">9</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(255,159,10,0.15);color:#ff9f0a">Fastball</div>
+      <div class="pitch-name">Low-Zone Sinker (Run Down)</div>
+      <div class="pitch-archetype">Sinker w/ arm-side run, low zone</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#ff9f0a">.370–.420</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:44%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">36–44%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">5–9%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-ok">LOW-MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">.380–.500</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#ff9f0a">88–93</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-warn">MOD</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value">-7° to -9°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-safe">STEEP</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DAMAGE TIER: MANAGEABLE -->
+<div class="tier-divider tier-dmg-low" style="margin-top:14px">
+  <div class="tier-line"></div>
+  <div class="tier-label">▲ Manageable Damage Tier</div>
+  <div class="tier-line"></div>
+</div>
+
+<div class="rankings">
+
+  <!-- D10. Power Changeup — lower zone, proper fade -->
+  <div class="pitch-row damage-row" style="animation-delay:0.50s; border-left-color:#c8d0e0 !important">
+    <div class="rank" style="color:#c8d0e0">10</div>
+    <div class="pitch-info">
+      <div class="pitch-type-badge" style="background:rgba(200,208,224,0.12);color:#c8d0e0">Offspeed</div>
+      <div class="pitch-name">Low-Zone Changeup (Proper Fade)</div>
+      <div class="pitch-archetype">Skubal / Gallen / Cole arch.</div>
+    </div>
+    <div class="whiff-col">
+      <div class="whiff-label" style="color:#c8d0e0">.300–.360</div>
+      <div class="whiff-bar-track"><div class="damage-bar-fill" style="width:30%; background:linear-gradient(to right, #c8d0e0, #a0aec0)"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#c8d0e0">28–36%</div>
+      <div class="metric-range">hard contact</div>
+      <div class="bucket-pill bucket-ok">MANAGEABLE</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#c8d0e0">3–7%</div>
+      <div class="metric-range">barrel rate</div>
+      <div class="bucket-pill bucket-safe">LOW</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#c8d0e0">.280–.400</div>
+      <div class="metric-range">xSLG</div>
+      <div class="bucket-pill bucket-ok">LOW</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:#c8d0e0">83–88</div>
+      <div class="metric-range">mph EV</div>
+      <div class="bucket-pill bucket-safe">LOW</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-value" style="color:var(--accent3)">-6° to -8°</div>
+      <div class="metric-range">VAA</div>
+      <div class="bucket-pill bucket-safe">PLUS</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- COMBINED METHODOLOGY -->
+<div class="methodology" style="margin-top:48px">
+  <div class="method-card">
+    <div class="method-title">// Zone Whiff Metric Buckets</div>
+    <div class="method-grid">
+      <div class="bucket-def">
+        <strong>Velocity Buckets</strong>
+        Elite: 95+ mph<br>
+        Plus: 90–94 mph<br>
+        Firm: 87–89 mph<br>
+        Average: 83–86 mph<br>
+        Soft: &lt;83 mph
+      </div>
+      <div class="bucket-def">
+        <strong>IVB Buckets</strong>
+        Elite Rise: +18"+ (4-seam)<br>
+        Plus Rise: +12–18"<br>
+        Elite Depth: -7"+ (neg.)<br>
+        Plus Depth: -4 to -7"<br>
+        Neutral: -3 to +3"
+      </div>
+      <div class="bucket-def">
+        <strong>H-Break Buckets</strong>
+        Elite: 16"+ (any dir.)<br>
+        Plus: 10–15"<br>
+        Average: 5–9"<br>
+        Low: &lt;5"
+      </div>
+      <div class="bucket-def">
+        <strong>VAA Buckets</strong>
+        Flat: -3° to -4.5°<br>
+        Plus: -5° to -6.5°<br>
+        Steep: -7° to -9°<br>
+        V. Steep: -9°+
+      </div>
+    </div>
+  </div>
+  <div class="method-card" style="border-color:rgba(255,45,85,0.2)">
+    <div class="method-title" style="color:#ff2d55">// Damage Metric Buckets</div>
+    <div class="method-grid">
+      <div class="bucket-def">
+        <strong>xwOBA Buckets</strong>
+        Critical: .520+<br>
+        High: .440–.519<br>
+        Moderate: .360–.439<br>
+        Manageable: &lt;.360
+      </div>
+      <div class="bucket-def">
+        <strong>Hard Hit% Buckets</strong>
+        Critical: 55%+<br>
+        High: 44–54%<br>
+        Moderate: 33–43%<br>
+        Manageable: &lt;33%
+      </div>
+      <div class="bucket-def">
+        <strong>Barrel% Buckets</strong>
+        Critical: 15%+<br>
+        High: 9–14%<br>
+        Moderate: 5–8%<br>
+        Manageable: &lt;5%
+      </div>
+      <div class="bucket-def">
+        <strong>Exit Velo Context</strong>
+        95+ mph → HR threat<br>
+        90–94 → gap power<br>
+        85–89 → line drive risk<br>
+        &lt;85 → weak contact<br>
+        <span style="color:var(--accent);font-size:9px">Low EV ≠ safe — see Barrel%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="footnote">
   Data source: Statcast / Baseball Savant 2026 MLB Season (thru May 2026) · Pitch profiles represent archetypes, not individual pitchers · Zone defined as rulebook strike zone ±0.5 ft buffer<br>
-  IVB = Induced Vertical Break (gravity-removed) · VAA = Vertical Approach Angle at plate · HAA = Horizontal Approach Angle at plate · In-Zone Whiff = Whiffs ÷ Swings on pitches located in zone
+  IVB = Induced Vertical Break (gravity-removed) · VAA = Vertical Approach Angle at plate · HAA = Horizontal Approach Angle at plate · xwOBA = Expected wOBA on contact in zone · Hard Hit% = EV ≥ 95 mph
 </div>
 
 </body>
