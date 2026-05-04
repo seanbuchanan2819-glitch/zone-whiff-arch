@@ -137,6 +137,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     gap: 6px;
   }
 
@@ -385,6 +386,13 @@
   .damage-row {
     grid-template-columns: 36px 240px 1fr 80px 80px 80px 80px 80px !important;
     width: 100%;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .pitch-row {
+    flex-shrink: 0;
+    min-width: 0;
   }
 
   /* ── SECTION BREAK ── */
@@ -1199,7 +1207,7 @@
     </div>
   </div>
 
-<div class="tier-divider tier-dmg-high" style="margin-top:14px; max-width:1100px; margin-left:auto; margin-right:auto;">
+<div class="tier-divider tier-dmg-high" style="margin-top:14px; width:100%; flex-basis:100%;">
   <div class="tier-line" style="background:rgba(255,107,53,0.3)"></div>
   <div class="tier-label">▲ High Damage Tier</div>
   <div class="tier-line" style="background:rgba(255,107,53,0.3)"></div>
@@ -1325,7 +1333,7 @@
 
 
 <!-- DAMAGE TIER: MODERATE -->
-<div class="tier-divider tier-dmg-mod" style="margin-top:14px; max-width:1100px; margin-left:auto; margin-right:auto;">
+<div class="tier-divider tier-dmg-mod" style="margin-top:14px; width:100%; flex-basis:100%;">
   <div class="tier-line" style="background:rgba(255,159,10,0.3)"></div>
   <div class="tier-label">▲ Moderate Damage Tier</div>
   <div class="tier-line" style="background:rgba(255,159,10,0.3)"></div>
@@ -1451,7 +1459,7 @@
 
 
 <!-- DAMAGE TIER: MANAGEABLE -->
-<div class="tier-divider tier-dmg-low" style="margin-top:14px; max-width:1100px; margin-left:auto; margin-right:auto;">
+<div class="tier-divider tier-dmg-low" style="margin-top:14px; width:100%; flex-basis:100%;">
   <div class="tier-line"></div>
   <div class="tier-label">▲ Manageable Damage Tier</div>
   <div class="tier-line"></div>
