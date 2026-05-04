@@ -86,7 +86,7 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 4px;
-    max-width: 900px;
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -111,21 +111,21 @@
   /* COLUMN HEADERS */
   .col-headers {
     display: grid;
-    grid-template-columns: 36px 240px 140px 88px 88px 88px 88px 88px;
+    grid-template-columns: 44px 280px 150px 110px 110px 110px 110px 110px;
     gap: 0;
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto 8px;
     padding: 0 8px;
   }
 
   .col-head {
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.12em;
+    font-size: 10px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #ffffff;
     text-align: center;
-    padding: 4px 2px;
+    padding: 6px 4px;
     border-bottom: 1px solid var(--dim);
   }
 
@@ -133,23 +133,23 @@
 
   /* PITCH CARDS */
   .rankings {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 6px;
+    gap: 5px;
   }
 
   .pitch-row {
     display: grid;
-    grid-template-columns: 36px 240px 140px 88px 88px 88px 88px 88px;
+    grid-template-columns: 44px 280px 150px 110px 110px 110px 110px 110px;
     gap: 0;
     background: var(--surface);
     border: 1px solid var(--border);
     border-left: 3px solid transparent;
     border-radius: 3px;
-    padding: 14px 8px;
+    padding: 10px 12px;
     align-items: center;
     transition: all 0.2s ease;
     position: relative;
@@ -182,7 +182,7 @@
   /* RANK */
   .rank {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 26px;
     color: #c8d0e0;
     text-align: center;
     line-height: 1;
@@ -198,10 +198,10 @@
   .pitch-type-badge {
     display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.15em;
+    font-size: 10px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 2px 6px;
+    padding: 3px 7px;
     border-radius: 2px;
     margin-bottom: 5px;
     background: var(--dim);
@@ -210,18 +210,18 @@
 
   .pitch-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 0.04em;
+    font-size: 21px;
+    letter-spacing: 0.03em;
     color: #ffffff;
     line-height: 1;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
 
   .pitch-archetype {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--accent);
     font-family: 'DM Mono', monospace;
-    margin-top: 3px;
+    margin-top: 4px;
   }
 
   /* ZONE WHIFF BAR */
@@ -230,12 +230,12 @@
   .damage-row .whiff-col { padding: 0 8px; }
 
   .damage-row .whiff-label {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .whiff-label {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 24px;
     color: var(--accent3);
     line-height: 1;
     margin-bottom: 4px;
@@ -263,23 +263,23 @@
 
   .metric-value {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 17px;
+    font-size: 20px;
     line-height: 1;
     margin-bottom: 2px;
   }
 
   .metric-range {
     font-family: 'DM Mono', monospace;
-    font-size: 8px;
+    font-size: 9px;
     color: #ffffff;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
   }
 
   .bucket-pill {
     display: inline-block;
     font-family: 'DM Mono', monospace;
-    font-size: 8px;
-    padding: 2px 5px;
+    font-size: 9px;
+    padding: 3px 7px;
     border-radius: 2px;
     margin-top: 3px;
     letter-spacing: 0.05em;
@@ -292,7 +292,7 @@
 
   /* METHODOLOGY */
   .methodology {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 40px auto 0;
     display: grid;
     grid-template-columns: 1fr;
@@ -340,7 +340,7 @@
   }
 
   .footnote {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 16px auto 0;
     font-family: 'DM Mono', monospace;
     font-size: 9px;
@@ -361,7 +361,7 @@
 
   /* DIVIDER LABELS */
   .tier-divider {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 12px auto 6px;
     display: flex;
     align-items: center;
@@ -390,7 +390,7 @@
 
   /* Force damage rows to same grid as damage col headers */
   .damage-row {
-    grid-template-columns: 36px 240px 140px 88px 88px 88px 88px 88px !important;
+    grid-template-columns: 44px 280px 150px 110px 110px 110px 110px 110px !important;
     width: 100%;
     flex-shrink: 0;
     min-width: 0;
@@ -403,7 +403,7 @@
 
   /* ── SECTION BREAK ── */
   .section-break {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 60px auto 48px;
     display: flex;
     flex-direction: column;
@@ -476,7 +476,7 @@
     background: rgba(255, 45, 85, 0.05);
     border: 1px solid rgba(255, 45, 85, 0.2);
     border-radius: 4px;
-    max-width: 900px;
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -541,9 +541,9 @@
   /* DAMAGE COL HEADERS */
   .damage-col-headers {
     display: grid;
-    grid-template-columns: 36px 240px 140px 88px 88px 88px 88px 88px;
+    grid-template-columns: 44px 280px 150px 110px 110px 110px 110px 110px;
     gap: 0;
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto 8px;
     padding: 0 8px;
   }
