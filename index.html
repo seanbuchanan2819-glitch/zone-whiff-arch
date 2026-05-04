@@ -227,6 +227,12 @@
   /* ZONE WHIFF BAR */
   .whiff-col { padding: 0 12px; }
 
+  .damage-row .whiff-col { padding: 0 8px; }
+
+  .damage-row .whiff-label {
+    font-size: 16px;
+  }
+
   .whiff-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
@@ -382,9 +388,9 @@
   .tier-avg   .tier-label { color: var(--accent2); }
   .tier-std   .tier-label { color: #c8d0e0; }
 
-  /* Force damage rows to same grid as pitch rows but full width */
+  /* Force damage rows to same grid as damage col headers */
   .damage-row {
-    grid-template-columns: 36px 240px 1fr 80px 80px 80px 80px 80px !important;
+    grid-template-columns: 36px 260px 120px 90px 90px 90px 90px 100px !important;
     width: 100%;
     flex-shrink: 0;
     min-width: 0;
@@ -535,7 +541,7 @@
   /* DAMAGE COL HEADERS */
   .damage-col-headers {
     display: grid;
-    grid-template-columns: 36px 240px 1fr 80px 80px 80px 80px 80px;
+    grid-template-columns: 36px 260px 120px 90px 90px 90px 90px 100px;
     gap: 0;
     max-width: 1100px;
     margin: 0 auto 8px;
@@ -1080,6 +1086,7 @@
   <div class="col-head">xSLG</div>
   <div class="col-head">Exit Velo</div>
   <div class="col-head">Launch Angle</div>
+</div>
 
 <!-- DAMAGE TIER: CRITICAL -->
 <div class="tier-divider tier-dmg-elite" style="margin-top:8px">
