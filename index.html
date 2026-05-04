@@ -381,6 +381,12 @@
   .tier-avg   .tier-label { color: var(--accent2); }
   .tier-std   .tier-label { color: #c8d0e0; }
 
+  /* Force damage rows to same grid as pitch rows but full width */
+  .damage-row {
+    grid-template-columns: 36px 240px 1fr 80px 80px 80px 80px 80px !important;
+    width: 100%;
+  }
+
   /* ── SECTION BREAK ── */
   .section-break {
     max-width: 1100px;
@@ -1193,15 +1199,11 @@
     </div>
   </div>
 
-</div>
-
-<div class="tier-divider tier-dmg-high" style="margin-top:14px">
+<div class="tier-divider tier-dmg-high" style="margin-top:14px; max-width:1100px; margin-left:auto; margin-right:auto;">
   <div class="tier-line" style="background:rgba(255,107,53,0.3)"></div>
   <div class="tier-label">▲ High Damage Tier</div>
   <div class="tier-line" style="background:rgba(255,107,53,0.3)"></div>
 </div>
-
-<div class="rankings">
 
   <!-- D4. Cutter — glove-side, mid-zone -->
   <div class="pitch-row damage-row" style="animation-delay:0.20s; border-left-color:#ff6b35 !important">
@@ -1320,16 +1322,14 @@
     </div>
   </div>
 
-</div>
+
 
 <!-- DAMAGE TIER: MODERATE -->
-<div class="tier-divider tier-dmg-mod" style="margin-top:14px">
+<div class="tier-divider tier-dmg-mod" style="margin-top:14px; max-width:1100px; margin-left:auto; margin-right:auto;">
   <div class="tier-line" style="background:rgba(255,159,10,0.3)"></div>
   <div class="tier-label">▲ Moderate Damage Tier</div>
   <div class="tier-line" style="background:rgba(255,159,10,0.3)"></div>
 </div>
-
-<div class="rankings">
 
   <!-- D7. Sweeper — elevated or middle zone -->
   <div class="pitch-row damage-row" style="animation-delay:0.35s; border-left-color:#ff9f0a !important">
@@ -1448,16 +1448,14 @@
     </div>
   </div>
 
-</div>
+
 
 <!-- DAMAGE TIER: MANAGEABLE -->
-<div class="tier-divider tier-dmg-low" style="margin-top:14px">
+<div class="tier-divider tier-dmg-low" style="margin-top:14px; max-width:1100px; margin-left:auto; margin-right:auto;">
   <div class="tier-line"></div>
   <div class="tier-label">▲ Manageable Damage Tier</div>
   <div class="tier-line"></div>
 </div>
-
-<div class="rankings">
 
   <!-- D10. Power Changeup — lower zone, proper fade -->
   <div class="pitch-row damage-row" style="animation-delay:0.50s; border-left-color:#c8d0e0 !important">
